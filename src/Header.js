@@ -1,14 +1,27 @@
 import React from "react";
 import "./Header.css";
+import { useState } from "react";
 
-function Header() {
+function Header(props) {
+  const [search, setsearch] = useState("");
+
+  function handleChange(event) {
+    setsearch(event.target.value);
+  }
+
   return (
     <header>
-      <form id="form">
+      <form
+        id="form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          props.handleSubmit(search);
+        }}
+      >
         <input
           type="text"
           placeholder="Search"
-          //   onChange={handleChange}
+          onChange={handleChange}
           name="search"
           className="search"
         />
@@ -17,3 +30,4 @@ function Header() {
   );
 }
 export default Header;
+// onSubmit={handleSubmit}
